@@ -1,0 +1,33 @@
+
+COLOCAR ESTA LISTA ENORME NO P4
+conf t
+router bgp 302
+neighbor rrc peer-group
+neighbor rrc remote-as 302
+neighbor rrc update-source loop0
+neighbor rrc route-reflector-client
+neighbor 30.1.255.1 peer-group rrc
+neighbor 30.1.255.2 peer-group rrc
+neighbor 30.1.255.3 peer-group rrc
+neighbor 30.1.255.4 peer-group rrc
+neighbor 30.1.255.5 peer-group rrc
+neighbor 30.1.255.6 peer-group rrc
+neighbor 30.3.255.7 peer-group rrc
+neighbor 10.0.255.1 peer-group rrc
+neighbor 10.0.255.2 peer-group rrc
+neighbor 10.0.255.3 peer-group rrc
+neighbor 10.0.255.5 peer-group rrc
+neighbor 10.0.255.6 peer-group rrc
+end
+write
+
+COLOCAR ESTE COMANDO EM TODOS OS ROUTERS DO AS 302(EXCETO NOS DE FRONTEIRA OU SEJA PE1 E PE3 E P4)
+conf t
+router bgp 302
+network 30.0.0.0 mask 255.252.0.0
+network 60.0.0.0 mask 255.255.224.0
+neighbor 10.0.255.4 remote-as 302
+neighbor 10.0.255.4 update-source loop0
+neighbor 10.0.255.4 next-hop-self
+end
+write

@@ -1,0 +1,15 @@
+conf t
+ip access-list extended pbr
+ permit ip 194.14.56.0 0.0.3.255 60.0.26.0 0.0.1.255
+end
+
+conf t
+route-map pbr permit 10
+ match ip address pbr
+ set ip next-hop 10.1.38.1
+end
+
+conf t
+interface GigabitEthernet5/0
+ ip policy route-map pbr
+end
